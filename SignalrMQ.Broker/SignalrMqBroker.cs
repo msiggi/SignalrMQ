@@ -1,6 +1,8 @@
-﻿namespace SignalrMQ.Broker
+﻿using Microsoft.AspNetCore.SignalR;
+
+namespace SignalrMQ.Broker
 {
-    public class SignalrMqBroker //: Hub
+    public class SignalrMqBroker : Hub
     {
 
     }

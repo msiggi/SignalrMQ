@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using SignalrMQ.Broker;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,5 +27,7 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+app.UseEndpoints(endpoints => endpoints.MapHub<SignalrMqBroker>("brokerhub"));
 
 app.Run();

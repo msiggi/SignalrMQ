@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SignalrMQ.Broker\SignalrMQ.Broker.csproj" />
+  </ItemGroup>
+
 </Project>
