@@ -5,5 +5,6 @@ namespace SignalrMQ.Broker
     {
         Task Publish(string exchangename, object obj);
         Task Subscribe(string exchangename);
+        Task Unsubscribe(string exchangename);
     }
 }

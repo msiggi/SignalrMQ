@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR.Client;
+using SignalrMQ.Client;
 
 namespace SignalrMQ.WorkerServiceClient
 {
@@ -7,22 +8,9 @@ namespace SignalrMQ.WorkerServiceClient
         private readonly ILogger<Worker> _logger;
         private object connection;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(ILogger<Worker> logger, SignalrMqClientService signalrMqClientService)
         {
             _logger = logger;
-
-            HubConnection connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7141/BrokerHub")
-                .Build();
-
-            connection.Closed += async (error) =>
-            {
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await connection.StartAsync();
-            };
-
-            await connection.StartAsync();
-
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

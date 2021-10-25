@@ -7,15 +7,17 @@ namespace SignalrMQ.Client
     {
         public SignalrMqClientService(ILogger<SignalrMqClientService> logger)
         {
-            
+            Task.Run(async () =>
+            {
+                await StartConnection();
+            });
         }
 
         public async Task StartConnection()
         {
             HubConnection hubConnection = new HubConnectionBuilder()
-                            .WithUrl("https://localhost:7141/BrokerHub")
+                            .WithUrl("https://localhost:7284/BrokerHub")
                             .Build();
-
 
             hubConnection.Closed += async (error) =>
             {
@@ -25,6 +27,7 @@ namespace SignalrMQ.Client
 
             await hubConnection.StartAsync();
 
+            await hubConnection.InvokeAsync("Publish", "sdfsd", "sdfsdfr");
         }
     }
 }

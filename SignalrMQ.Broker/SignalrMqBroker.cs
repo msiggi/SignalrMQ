@@ -13,5 +13,10 @@ namespace SignalrMQ.Broker
         {
             throw new NotImplementedException();
         }
+
+        public Task Unsubscribe(string exchangename)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

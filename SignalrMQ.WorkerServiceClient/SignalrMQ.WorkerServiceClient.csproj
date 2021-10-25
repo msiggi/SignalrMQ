@@ -12,4 +12,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="6.0.0-rc.2.21480.10" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0-rc.2.21480.5" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\SignalrMQ.Client\SignalrMQ.Client.csproj" />
+	</ItemGroup>
 </Project>
