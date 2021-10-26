@@ -18,12 +18,19 @@ variables:
 
 
 steps:
-- task: NuGetCommand@2
-  timeoutInMinutes: 3
-  displayName: "nuget restore"
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk RC2'
   inputs:
-    command: 'restore'
-    restoreSolution: '$(solution)'
+    packageType: 'sdk'
+    version: '6.0.100-rc.1.21463.6'
+    includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '**/SignalrMQ.Broker.csproj'
+
 
 - task: DotNetCoreCLI@2
   displayName: Build
