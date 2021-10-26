@@ -28,6 +28,6 @@ app.UseRouting();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-app.UseEndpoints(endpoints => endpoints.MapHub<SignalrMqBroker>("brokerhub"));
+app.UseEndpoints(endpoints => endpoints.MapHub<SignalrMqBroker>("signalrmqbrokerhub"));
 
 app.Run();

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using SignalrMQ.Client;
+using SignalrMQ.WorkerServiceClient.Configuration;
 
 namespace SignalrMQ.WorkerServiceClient
 {
@@ -11,6 +12,11 @@ namespace SignalrMQ.WorkerServiceClient
         public Worker(ILogger<Worker> logger, SignalrMqClientService signalrMqClientService)
         {
             _logger = logger;
+
+            Task.Run(async () =>
+            {
+                await signalrMqClientService.StartConnection(AppSettings.BrokerSettings.Host, AppSettings.BrokerSettings.Port);
+            });
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

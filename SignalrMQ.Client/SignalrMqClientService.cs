@@ -5,18 +5,17 @@ namespace SignalrMQ.Client
 {
     public class SignalrMqClientService
     {
+        private readonly ILogger<SignalrMqClientService> logger;
+
         public SignalrMqClientService(ILogger<SignalrMqClientService> logger)
         {
-            Task.Run(async () =>
-            {
-                await StartConnection();
-            });
+            this.logger = logger;
         }
 
-        public async Task StartConnection()
+        public async Task StartConnection(string host, int port = 443)
         {
             HubConnection hubConnection = new HubConnectionBuilder()
-                            .WithUrl("https://localhost:7284/BrokerHub")
+                            .WithUrl($"https://{host}:{port}/signalrmqbrokerhub")
                             .Build();
 
             hubConnection.Closed += async (error) =>
