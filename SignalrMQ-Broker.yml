@@ -10,7 +10,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  project:  'SignalrMQ.Broker/SignalrMQ.Broker.csproj'
+  project:  '**/*.csproj'
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
@@ -29,7 +29,7 @@ steps:
   displayName: 'dotnet restore'
   inputs:
     command: restore
-    projects: '**/SignalrMQ.Broker.csproj'
+    projects: '**/*.csproj'
 
 
 - task: DotNetCoreCLI@2
