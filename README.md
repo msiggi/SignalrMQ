@@ -1,6 +1,6 @@
 # SignalrMQ
 
-![](Resources/Logo_SignalrMQ.png)
+<img src="Resources/Logo_SignalrMQ.png" width=128 />
 
 ## The Idea
 
