@@ -4,6 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Company>Marcel Siegel</Company>
+    <Description>Broker for SignalrMQ</Description>
+    <PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
