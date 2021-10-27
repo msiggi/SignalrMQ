@@ -4,14 +4,50 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- nugetrelease
 
 pool:
   vmImage: windows-latest
 
+variables:
+  project:  'SignalrMQ.Blazor/SignalrMQ.Blazor.csproj'
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  MSBuildSDKsPath: 'C:\\hostedtoolcache\\windows\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\sdks'
+
+
 steps:
-- task: DotNetCoreCLI@2
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk RC2'
   inputs:
-    command: 'pack'
-    packagesToPack: 'SignalrMQ.Broker/SignalrMQ.Broker.csproj'
-    versioningScheme: 'off'
+    packageType: 'sdk'
+    version: '6.0.100-rc.2.21505.57'
+    includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '$(project)'
+
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '$(project)'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: '$(project)'
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  condition: succeededOrFailed()
