@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{87CDBAC6-C874-40A0-A981-D5313488E58A}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		SignalrMQ-Broker.yml = SignalrMQ-Broker.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrMQ.BlazorBroker", "SignalrMQ.BlazorBroker\SignalrMQ.BlazorBroker.csproj", "{1F8D17D3-4C15-4A9D-9293-BAD85BA6DD9F}"
@@ -16,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrMQ.Client", "Signalr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrMQ.WorkerServiceClient", "SignalrMQ.WorkerServiceClient\SignalrMQ.WorkerServiceClient.csproj", "{AF6FD4F1-BA05-4AE1-BC85-560F8F5D31FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalrMQ.WorkerServiceClientRcv", "SignalrMQ.WorkerServiceClientRcv\SignalrMQ.WorkerServiceClientRcv.csproj", "{4F60F661-6E68-4677-A693-A45E88E90A32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrMQ.WorkerServiceClientRcv", "SignalrMQ.WorkerServiceClientRcv\SignalrMQ.WorkerServiceClientRcv.csproj", "{4F60F661-6E68-4677-A693-A45E88E90A32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
