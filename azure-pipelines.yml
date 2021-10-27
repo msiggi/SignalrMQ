@@ -33,21 +33,8 @@ steps:
 
 
 - task: DotNetCoreCLI@2
-  displayName: Build
+  displayName: Pack
   inputs:
+    command: pack 
     projects: '$(project)'
     arguments: '--configuration $(BuildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: publish
-    publishWebProjects: false
-    projects: '$(project)'
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: false
-    modifyOutputPath: false
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  condition: succeededOrFailed()
