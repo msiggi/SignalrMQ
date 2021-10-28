@@ -1,14 +1,21 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SignalrMQ.Core;
 
 namespace SignalrMQ.Client
 {
-    public class SignalrMqClientService
+    public class SignalrMqClientService : ISignalrMqClientService
     {
         private readonly ILogger<SignalrMqClientService> logger;
         private HubConnection hubConnection;
         public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+
+        public SignalrMqClientService(ILogger<SignalrMqClientService> logger, IOptions<SignalrMqBrokerInformation> options)
+        {
+            this.logger = logger;
+            StartConnection(options.Value.Host, options.Value.Port).GetAwaiter().GetResult();
+        }
 
         public SignalrMqClientService(ILogger<SignalrMqClientService> logger)
         {
