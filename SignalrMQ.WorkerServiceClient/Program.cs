@@ -10,6 +10,7 @@ IHost host = Host.CreateDefaultBuilder(args)
 
         services.AddSingleton<SignalrMqClientService>();
         services.AddHostedService<Worker>();
+        
     })
     .Build();
 
