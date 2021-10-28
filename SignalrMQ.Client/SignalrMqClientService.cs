@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
+using SignalrMQ.Core;
 
 namespace SignalrMQ.Client
 {
@@ -29,11 +30,12 @@ namespace SignalrMQ.Client
                 await hubConnection.StartAsync();
             };
 
-            hubConnection.On<object>("rcv", rcv =>
+            hubConnection.On<MessageItem>("rcv", rcv =>
             {
                 MessageReceived?.Invoke(this, new MessageReceivedEventArgs
                 {
-                    Payload = rcv
+                    ReferenceCode = rcv.ReferenceCode,
+                    Payload = rcv.Payload
                 });
             });
 
@@ -56,17 +58,20 @@ namespace SignalrMQ.Client
             }
         }
 
-        public async Task Publish(string exchangename, object payload)
+        public async Task Publish(string apiKey, string exchangename, string referenceCode, object payload)
         {
-            await hubConnection.SendAsync("Publish", exchangename, payload);
+            await hubConnection.SendAsync("Publish", apiKey, exchangename, referenceCode, payload);
         }
-        public async Task Subscribe(string exchangename)
+
+
+
+        public async Task Subscribe(string apiKey, string exchangename)
         {
-            await hubConnection.SendAsync("Subscribe", exchangename);
+            await hubConnection.SendAsync("Subscribe", apiKey, exchangename);
         }
-        public async Task Unsubscribe(string exchangename)
+        public async Task Unsubscribe(string apiKey, string exchangename)
         {
-            await hubConnection.SendAsync("Unsubscribe", exchangename);
+            await hubConnection.SendAsync("Unsubscribe", apiKey, exchangename);
         }
 
     }

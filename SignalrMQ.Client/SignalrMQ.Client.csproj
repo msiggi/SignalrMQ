@@ -4,10 +4,19 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  <Company>Marcel Siegel</Company>
+	  <Description>Client-Library for SignalrMQ-Boker</Description>
+	  <PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
+	  <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0-rc.2.21480.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SignalrMQ.Core\SignalrMQ.Core.csproj" />
   </ItemGroup>
 
 </Project>

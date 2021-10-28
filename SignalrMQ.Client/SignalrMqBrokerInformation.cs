@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SignalrMQ.Client
 {
-    public class BrokerSettings
+    public class SignalrMqBrokerInformation
     {
         public string Host { get; set; }
         public int Port { get; set; }
+        public string ApiKey { get; set; }
     }
 }

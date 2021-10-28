@@ -18,12 +18,12 @@ namespace SignalrMQ.WorkerServiceClientRcv
 
         private void SignalrMqClientService_MessageReceived(object? sender, MessageReceivedEventArgs e)
         {
-           _logger.LogInformation(e.Payload.ToString());
+            _logger.LogInformation(e.ReferenceCode + " - " + e.Payload.ToString());
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await signalrMqClientService.Subscribe("test");
+            await signalrMqClientService.Subscribe("testapikey", "test");
         }
     }
 }

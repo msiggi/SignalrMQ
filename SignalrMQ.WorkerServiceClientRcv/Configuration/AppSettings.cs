@@ -9,6 +9,6 @@ namespace SignalrMQ.WorkerServiceClientRcv.Configuration
 {
     public static class AppSettings
     {
-        public static BrokerSettings BrokerSettings { get; set; }
+        public static SignalrMqBrokerInformation BrokerSettings { get; set; }
     }
 }

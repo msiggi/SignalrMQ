@@ -4,14 +4,19 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Company>Marcel Siegel</Company>
     <Description>Broker for SignalrMQ</Description>
     <PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SignalrMQ.Core\SignalrMQ.Core.csproj" />
   </ItemGroup>
 
 </Project>
