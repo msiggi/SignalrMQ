@@ -16,11 +16,7 @@ namespace SignalrMQ.Client
             this.logger = logger;
             StartConnection(options.Value.Host, options.Value.Port).GetAwaiter().GetResult();
         }
-
-        public SignalrMqClientService(ILogger<SignalrMqClientService> logger)
-        {
-            this.logger = logger;
-        }
+             
 
         public async Task StartConnection(string host, int port = 443)
         {
@@ -69,8 +65,6 @@ namespace SignalrMQ.Client
         {
             await hubConnection.SendAsync("Publish", apiKey, exchangename, referenceCode, payload);
         }
-
-
 
         public async Task Subscribe(string apiKey, string exchangename)
         {
