@@ -7,16 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-static class ServiceCollectionsExtensions
+public static class ServiceCollectionsExtensions
 {
     // https://csharp.christiannagel.com/2016/07/27/diwithoptions/
-    public static IServiceCollection AddSignalrMqClientService(this IServiceCollection collection,
+    public static IServiceCollection AddSignalrMqClientService(this IServiceCollection services,
         Action<SignalrMqBrokerInformation> setupAction)
     {
-        if (collection == null) throw new ArgumentNullException(nameof(collection));
+        if (services == null) throw new ArgumentNullException(nameof(services));
         if (setupAction == null) throw new ArgumentNullException(nameof(setupAction));
 
-        collection.Configure(setupAction);
-        return collection.AddTransient<ISignalrMqClientService, SignalrMqClientService>();
+        services.Configure(setupAction);
+        services.AddSingleton<SignalrMqClientService>();
+
+        return services;
     }
 }

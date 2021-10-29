@@ -14,8 +14,13 @@ namespace SignalrMQ.WorkerServiceClient
         {
             _logger = logger;
             this.signalrMqClientService = signalrMqClientService;
-            this.signalrMqClientService.StartConnection(AppSettings.BrokerSettings.Host, AppSettings.BrokerSettings.Port).GetAwaiter().GetResult();
+            //this.signalrMqClientService.StartConnection(AppSettings.BrokerSettings.Host, AppSettings.BrokerSettings.Port).GetAwaiter().GetResult();
         }
+
+        //public Worker(ILogger<Worker> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -23,7 +28,7 @@ namespace SignalrMQ.WorkerServiceClient
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Sende..." + DateTime.Now + " " + i);
-                await signalrMqClientService.Publish("testapikey", "test", "testref", "Payload: " + DateTime.Now + " " + i);
+                //await signalrMqClientService.Publish("testapikey", "test", "testref", "Payload: " + DateTime.Now + " " + i);
                 i++;
                 await Task.Delay(1000, stoppingToken);
             }
