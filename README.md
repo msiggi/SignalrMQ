@@ -11,7 +11,7 @@ Also if you are going ahead with the .net core environment maybe you wish to imp
 ## Features
 
 * Publish-Subscribe principle similar to MQTT
-* Reqest messages (Messages with return value)
+* Reqest messages (Messages with return value, personal wishlist-feature)
 
 
 ## Implementation
