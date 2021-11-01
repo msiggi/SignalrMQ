@@ -3,77 +3,94 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SignalrMQ.Core;
 
-namespace SignalrMQ.Client
+namespace SignalrMQ.Client;
+
+public class SignalrMqClientService : ISignalrMqClientService
 {
-    public class SignalrMqClientService : ISignalrMqClientService
+    private readonly ILogger<SignalrMqClientService> logger;
+    private HubConnection hubConnection;
+    public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+
+    public SignalrMqClientService(ILogger<SignalrMqClientService> logger, IOptions<SignalrMqBrokerInformation> options)
     {
-        private readonly ILogger<SignalrMqClientService> logger;
-        private HubConnection hubConnection;
-        public event EventHandler<MessageReceivedEventArgs> MessageReceived;
-
-        public SignalrMqClientService(ILogger<SignalrMqClientService> logger, IOptions<SignalrMqBrokerInformation> options)
+        this.logger = logger;
+        Task.Run(async () =>
         {
-            this.logger = logger;
-            StartConnection(options.Value.Host, options.Value.Port).GetAwaiter().GetResult();
-        }
-             
+            await StartConnection(options.Value.Host, options.Value.Port);//.GetAwaiter().GetResult();
+        });
+    }
 
-        public async Task StartConnection(string host, int port = 443)
+
+    public async Task StartConnection(string host, int port = 443)
+    {
+        string url = $"https://{host}:{port}/signalrmqbrokerhub";
+        hubConnection = new HubConnectionBuilder()
+                        .WithUrl(url)
+                        .Build();
+
+        hubConnection.Closed += async (error) =>
         {
-            string url = $"https://{host}:{port}/signalrmqbrokerhub";
-            hubConnection = new HubConnectionBuilder()
-                            .WithUrl(url)
-                            .Build();
+            logger.LogError($"Connection to {url} closed! Trying to reconnect...");
 
-            hubConnection.Closed += async (error) =>
+            await Task.Delay(new Random().Next(0, 5) * 1000);
+            await hubConnection.StartAsync();
+        };
+
+        hubConnection.On<MessageItem>("rcv", rcv =>
+        {
+            MessageReceived?.Invoke(this, new MessageReceivedEventArgs
             {
-                logger.LogError($"Connection to {url} closed! Trying to reconnect...");
-
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await hubConnection.StartAsync();
-            };
-
-            hubConnection.On<MessageItem>("rcv", rcv =>
-            {
-                MessageReceived?.Invoke(this, new MessageReceivedEventArgs
-                {
-                    ReferenceCode = rcv.ReferenceCode,
-                    Payload = rcv.Payload
-                });
+                ReferenceCode = rcv.ReferenceCode,
+                Payload = rcv.Payload
             });
+        });
 
+        await Connect(url);
+    }
+
+
+
+    private async Task Connect(string url)
+    {
+        try
+        {
+            await hubConnection.StartAsync();
+            logger.LogInformation($"Connection to {url} established!");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError($"No connection to {url} established! Trying again...");
+
+            await Task.Delay(new Random().Next(0, 5) * 1000);
             await Connect(url);
         }
+    }
 
-        private async Task Connect(string url)
-        {
-            try
-            {
-                await hubConnection.StartAsync();
-                logger.LogInformation($"Connection to {url} established!");
-            }
-            catch (Exception ex)
-            {
-                logger.LogError($"No connection to {url} established! Trrying again...");
-
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await Connect(url);
-            }
-        }
-
-        public async Task Publish(string apiKey, string exchangename, string referenceCode, object payload)
+    public async Task Publish(string apiKey, string exchangename, string referenceCode, object payload)
+    {
+        if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
         {
             await hubConnection.SendAsync("Publish", apiKey, exchangename, referenceCode, payload);
         }
+    }
 
-        public async Task Subscribe(string apiKey, string exchangename)
+    public async Task Subscribe(string apiKey, string exchangename)
+    {
+        if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
         {
             await hubConnection.SendAsync("Subscribe", apiKey, exchangename);
         }
-        public async Task Unsubscribe(string apiKey, string exchangename)
+    }
+    public async Task Unsubscribe(string apiKey, string exchangename)
+    {
+        if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
         {
             await hubConnection.SendAsync("Unsubscribe", apiKey, exchangename);
         }
+    }
 
+    public bool IsConnected
+    {
+        get { return hubConnection != null && hubConnection.State == HubConnectionState.Connected; }
     }
 }

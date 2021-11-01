@@ -5,16 +5,12 @@ using SignalrMQ.WorkerServiceClient.Configuration;
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
-        SignalrMqBrokerInformation brokerConfig = hostContext.Configuration
-            .GetSection(nameof(SignalrMqBrokerInformation))
-            .Get<SignalrMqBrokerInformation>();
-        AppSettings.BrokerSettings = brokerConfig;
+        //SignalrMqBrokerInformation brokerConfig = hostContext.Configuration
+        //    .GetSection(nameof(SignalrMqBrokerInformation))
+        //    .Get<SignalrMqBrokerInformation>();
+        //AppSettings.BrokerSettings = brokerConfig;
 
-        //services.Configure<SignalrMqBrokerInformation>(hostContext.Configuration.GetSection(nameof(SignalrMqBrokerInformation)));
-        //services.AddSingleton<ISignalrMqClientService, SignalrMqClientService>();
-
-        services.AddSignalrMqClientService(opts => opts = brokerConfig);
-
+        services.AddSignalrMqClientService(opts => hostContext.Configuration.GetSection(nameof(SignalrMqBrokerInformation)).Bind(opts));
         services.AddHostedService<Worker>();
 
     })
