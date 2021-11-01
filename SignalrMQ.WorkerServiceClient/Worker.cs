@@ -28,7 +28,7 @@ namespace SignalrMQ.WorkerServiceClient
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Sende..." + DateTime.Now + " " + i);
-                //await signalrMqClientService.Publish("testapikey", "test", "testref", "Payload: " + DateTime.Now + " " + i);
+                await signalrMqClientService.Publish("testapikey", "test", "testref", "Payload: " + DateTime.Now + " " + i);
                 i++;
                 await Task.Delay(1000, stoppingToken);
             }

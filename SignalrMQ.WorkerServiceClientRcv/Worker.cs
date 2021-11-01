@@ -12,7 +12,6 @@ namespace SignalrMQ.WorkerServiceClientRcv
         {
             _logger = logger;
             this.signalrMqClientService = signalrMqClientService;
-            this.signalrMqClientService.StartConnection(AppSettings.BrokerSettings.Host, AppSettings.BrokerSettings.Port).GetAwaiter().GetResult();
             this.signalrMqClientService.MessageReceived += SignalrMqClientService_MessageReceived;
         }
 
@@ -23,6 +22,13 @@ namespace SignalrMQ.WorkerServiceClientRcv
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            while (!signalrMqClientService.IsConnected)
+            {
+                _logger.LogInformation("connecting...");
+
+                await Task.Delay(1000, stoppingToken);
+            }
+
             await signalrMqClientService.Subscribe("testapikey", "test");
         }
     }
