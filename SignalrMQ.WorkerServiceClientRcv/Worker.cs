@@ -12,7 +12,16 @@ namespace SignalrMQ.WorkerServiceClientRcv
         {
             _logger = logger;
             this.signalrMqClientService = signalrMqClientService;
+            this.signalrMqClientService.ConnectionEstablished += SignalrMqClientService_Connected;
             this.signalrMqClientService.MessageReceived += SignalrMqClientService_MessageReceived;
+        }
+
+        private void SignalrMqClientService_Connected(object? sender, EventArgs e)
+        {
+            Task.Run(async () =>
+            {
+                await signalrMqClientService.Subscribe("testapikey", "test");
+            });
         }
 
         private void SignalrMqClientService_MessageReceived(object? sender, MessageReceivedEventArgs e)
@@ -29,7 +38,6 @@ namespace SignalrMQ.WorkerServiceClientRcv
                 await Task.Delay(1000, stoppingToken);
             }
 
-            await signalrMqClientService.Subscribe("testapikey", "test");
         }
     }
 }

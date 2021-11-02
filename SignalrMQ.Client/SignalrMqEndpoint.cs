@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SignalrMQ.Client
 {
-    public class SignalrMqBrokerInformation
+    public class SignalrMqEndpoint
     {
         public string Host { get; set; }
         public int Port { get; set; }

@@ -10,8 +10,9 @@ public class SignalrMqClientService : ISignalrMqClientService
     private readonly ILogger<SignalrMqClientService> logger;
     private HubConnection hubConnection;
     public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+    public event EventHandler<EventArgs> ConnectionEstablished;
 
-    public SignalrMqClientService(ILogger<SignalrMqClientService> logger, IOptions<SignalrMqBrokerInformation> options)
+    public SignalrMqClientService(ILogger<SignalrMqClientService> logger, IOptions<SignalrMqEndpoint> options)
     {
         this.logger = logger;
         Task.Run(async () =>
@@ -19,7 +20,6 @@ public class SignalrMqClientService : ISignalrMqClientService
             await StartConnection(options.Value.Host, options.Value.Port);//.GetAwaiter().GetResult();
         });
     }
-
 
     public async Task StartConnection(string host, int port = 443)
     {
@@ -48,14 +48,18 @@ public class SignalrMqClientService : ISignalrMqClientService
         await Connect(url);
     }
 
-
-
     private async Task Connect(string url)
     {
         try
         {
-            await hubConnection.StartAsync();
-            logger.LogInformation($"Connection to {url} established!");
+            logger.LogInformation($"connecting to {url} ...");
+
+            await hubConnection.StartAsync().ContinueWith((t) =>
+            {
+                ConnectionEstablished?.Invoke(this, new EventArgs());
+                logger.LogInformation($"Connection to {url} established!");
+            });
+
         }
         catch (Exception ex)
         {
