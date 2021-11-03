@@ -40,8 +40,7 @@ public class SignalrMqClientService : ISignalrMqClientService
         {
             MessageReceived?.Invoke(this, new MessageReceivedEventArgs
             {
-                ReferenceCode = rcv.ReferenceCode,
-                Payload = rcv.Payload
+                MessageItem = rcv
             });
         });
 
