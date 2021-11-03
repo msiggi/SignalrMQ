@@ -14,7 +14,13 @@ namespace SignalrMQ.WorkerServiceClient
         {
             _logger = logger;
             this.signalrMqClientService = signalrMqClientService;
+            this.signalrMqClientService.ConnectionEstablished += SignalrMqClientService_Connected;
             //this.signalrMqClientService.StartConnection(AppSettings.BrokerSettings.Host, AppSettings.BrokerSettings.Port).GetAwaiter().GetResult();
+        }
+
+        private void SignalrMqClientService_Connected(object? sender, EventArgs e)
+        {
+            
         }
 
         //public Worker(ILogger<Worker> logger)

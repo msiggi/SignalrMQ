@@ -11,7 +11,7 @@ public static class ServiceCollectionsExtensions
 {
     // https://csharp.christiannagel.com/2016/07/27/diwithoptions/
     public static IServiceCollection AddSignalrMqClientService(this IServiceCollection services,
-        Action<SignalrMqBrokerInformation> setupAction)
+        Action<SignalrMqEndpoint> setupAction)
     {
         if (services == null) throw new ArgumentNullException(nameof(services));
         if (setupAction == null) throw new ArgumentNullException(nameof(setupAction));
