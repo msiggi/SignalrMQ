@@ -1,8 +1,9 @@
-﻿namespace SignalrMQ.Client
+﻿using SignalrMQ.Core;
+
+namespace SignalrMQ.Client
 {
     public class MessageReceivedEventArgs : EventArgs
     {
-        public string ReferenceCode { get; set; }
-        public object Payload { get; set; }
+        public MessageItem MessageItem { get; set; }
     }
 }

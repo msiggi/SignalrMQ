@@ -8,9 +8,9 @@ public class SignalrMqBroker : Hub, ISignalrMqBroker
     public async Task Publish(string apiKey, string exchangename, string referenceCode, object payload)
     {
         await AddToGroup(apiKey, exchangename);
-        
+
         string? gk = GetGroupKey(apiKey, exchangename);
-        await Clients.Group(gk).SendAsync("rcv", new MessageItem(referenceCode, payload));
+        await Clients.Group(gk).SendAsync("rcv", new MessageItem(apiKey, exchangename, referenceCode, payload));
     }
 
     public async Task Subscribe(string apiKey, string exchangename)

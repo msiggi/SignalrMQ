@@ -26,7 +26,7 @@ namespace SignalrMQ.WorkerServiceClientRcv
 
         private void SignalrMqClientService_MessageReceived(object? sender, MessageReceivedEventArgs e)
         {
-            _logger.LogInformation(e.ReferenceCode + " - " + e.Payload.ToString());
+            _logger.LogInformation(e.MessageItem.ReferenceCode + " - " + e.MessageItem.Payload.ToString());
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
