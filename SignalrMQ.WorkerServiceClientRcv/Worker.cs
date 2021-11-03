@@ -20,7 +20,7 @@ namespace SignalrMQ.WorkerServiceClientRcv
         {
             Task.Run(async () =>
             {
-                await signalrMqClientService.Subscribe("testapikey", "test");
+                await signalrMqClientService.Subscribe("ThingsBridge", "ThingValue");
             });
         }
 
