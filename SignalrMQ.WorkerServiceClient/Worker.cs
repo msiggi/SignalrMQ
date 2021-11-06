@@ -15,26 +15,36 @@ namespace SignalrMQ.WorkerServiceClient
             _logger = logger;
             this.signalrMqClientService = signalrMqClientService;
             this.signalrMqClientService.ConnectionEstablished += SignalrMqClientService_Connected;
-            //this.signalrMqClientService.StartConnection(AppSettings.BrokerSettings.Host, AppSettings.BrokerSettings.Port).GetAwaiter().GetResult();
+            this.signalrMqClientService.MessageReceived += SignalrMqClientService_MessageReceived;
+            this.signalrMqClientService.MessageResponseReceived += SignalrMqClientService_MessageResponseReceived;
+        }
+
+        private void SignalrMqClientService_MessageResponseReceived(object? sender, MessageReceivedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SignalrMqClientService_MessageReceived(object? sender, MessageReceivedEventArgs e)
+        {
+            _logger.LogInformation(e.MessageItem.Payload.ToString());
         }
 
         private void SignalrMqClientService_Connected(object? sender, EventArgs e)
         {
-            
+            Task.Run(async () =>
+            {
+                await signalrMqClientService.Subscribe("testapikey", "testRequest");
+            });
         }
-
-        //public Worker(ILogger<Worker> logger)
-        //{
-        //    _logger = logger;
-        //}
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             int i = 0;
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Sende..." + DateTime.Now + " " + i);
+                _logger.LogInformation("Sende..." + i);
                 await signalrMqClientService.Publish("testapikey", "test", "testref", "Payload: " + DateTime.Now + " " + i);
+                await signalrMqClientService.PublishRequest("testapikey", "testResponse", "testref", "Payload: " + DateTime.Now + " " + i);
                 i++;
                 await Task.Delay(1000, stoppingToken);
             }

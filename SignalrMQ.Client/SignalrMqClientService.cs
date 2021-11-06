@@ -10,6 +10,8 @@ public class SignalrMqClientService : ISignalrMqClientService
     private readonly ILogger<SignalrMqClientService> logger;
     private HubConnection hubConnection;
     public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+    public event EventHandler<MessageReceivedEventArgs> MessageRequestReceived;
+    public event EventHandler<MessageReceivedEventArgs> MessageResponseReceived;
     public event EventHandler<EventArgs> ConnectionEstablished;
 
     public SignalrMqClientService(ILogger<SignalrMqClientService> logger, IOptions<SignalrMqEndpoint> options)
@@ -35,6 +37,22 @@ public class SignalrMqClientService : ISignalrMqClientService
             await Task.Delay(new Random().Next(0, 5) * 1000);
             await hubConnection.StartAsync();
         };
+
+        hubConnection.On<MessageItem>("rcv_request", rcv =>
+        {
+            MessageRequestReceived?.Invoke(this, new MessageReceivedEventArgs
+            {
+                MessageItem = rcv
+            });
+        });
+
+        hubConnection.On<MessageItem>("rcv_response", rcv =>
+        {
+            MessageResponseReceived?.Invoke(this, new MessageReceivedEventArgs
+            {
+                MessageItem = rcv
+            });
+        });
 
         hubConnection.On<MessageItem>("rcv", rcv =>
         {
@@ -74,6 +92,22 @@ public class SignalrMqClientService : ISignalrMqClientService
         if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
         {
             await hubConnection.SendAsync("Publish", apiKey, exchangename, referenceCode, payload);
+        }
+    }
+
+    public async Task PublishRequest(string apiKey, string exchangename, string referenceCode, object payload)
+    {
+        if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
+        {
+            await hubConnection.SendAsync("PublishRequest", apiKey, exchangename, referenceCode, payload);
+        }
+    }
+
+    public async Task PublishResponse(string apiKey, string exchangename, string referenceCode, object payload)
+    {
+        if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
+        {
+            await hubConnection.SendAsync("PublishResponse", apiKey, exchangename, referenceCode, payload);
         }
     }
 
