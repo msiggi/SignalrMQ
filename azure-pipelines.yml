@@ -10,7 +10,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  project:  '**/SignalrMQ.Broker.csproj;**/SignalrMQ.Client.csproj'
+  project:  '**/*.csproj'
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
