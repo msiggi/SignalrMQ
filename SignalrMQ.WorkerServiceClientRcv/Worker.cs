@@ -28,7 +28,7 @@ namespace SignalrMQ.WorkerServiceClientRcv
             Task.Run(async () =>
             {
                 await signalrMqClientService.Subscribe("testapikey", "test");
-                await signalrMqClientService.Subscribe("testapikey", "testResponse");
+                await signalrMqClientService.SubscribeForRequest("testapikey", "getDateTime");
             });
         }
 

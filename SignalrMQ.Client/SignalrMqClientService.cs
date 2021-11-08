@@ -40,6 +40,7 @@ public class SignalrMqClientService : ISignalrMqClientService
 
         hubConnection.On<MessageItem>("rcv_request", rcv =>
         {
+            rcv.ExchangeName = rcv.ExchangeName.Replace("__request","");
             MessageRequestReceived?.Invoke(this, new MessageReceivedEventArgs
             {
                 MessageItem = rcv
@@ -48,6 +49,7 @@ public class SignalrMqClientService : ISignalrMqClientService
 
         hubConnection.On<MessageItem>("rcv_response", rcv =>
         {
+            rcv.ExchangeName = rcv.ExchangeName.Replace("__response", "");
             MessageResponseReceived?.Invoke(this, new MessageReceivedEventArgs
             {
                 MessageItem = rcv
@@ -118,6 +120,19 @@ public class SignalrMqClientService : ISignalrMqClientService
             await hubConnection.SendAsync("Subscribe", apiKey, exchangename);
         }
     }
+
+    public async Task SubscribeForResponse(string apiKey, string exchangename)
+    {
+        exchangename += "__response";
+        await Subscribe(apiKey, exchangename);
+    }
+
+    public async Task SubscribeForRequest(string apiKey, string exchangename)
+    {
+        exchangename += "__request";
+        await Subscribe(apiKey, exchangename);
+    }
+
     public async Task Unsubscribe(string apiKey, string exchangename)
     {
         if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)

@@ -33,7 +33,8 @@ namespace SignalrMQ.WorkerServiceClient
         {
             Task.Run(async () =>
             {
-                await signalrMqClientService.Subscribe("testapikey", "testRequest");
+                //await signalrMqClientService.Subscribe("testapikey", "testRequest");
+                //await signalrMqClientService.SubscribeForResponse("testapikey", "archive");
             });
         }
 
@@ -43,8 +44,8 @@ namespace SignalrMQ.WorkerServiceClient
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Sende..." + i);
-                await signalrMqClientService.Publish("testapikey", "test", "testref", "Payload: " + DateTime.Now + " " + i);
-                await signalrMqClientService.PublishRequest("testapikey", "testResponse", "testref", "Payload: " + DateTime.Now + " " + i);
+                //await signalrMqClientService.Publish("testapikey", "test", "testref", "Payload: " + DateTime.Now + " " + i);
+                await signalrMqClientService.PublishRequest("testapikey", "getDateTime", "testref", "Payload: " + DateTime.Now + " " + i);
                 i++;
                 await Task.Delay(1000, stoppingToken);
             }

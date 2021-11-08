@@ -12,16 +12,17 @@ public class SignalrMqBroker : Hub
     }
     public async Task PublishRequest(string apiKey, string exchangename, string referenceCode, object payload)
     {
-        exchangename += "_request";
+        // automatically subscripe for response
+        string exchangename_Response = String.Concat(exchangename, "__response");
+        await AddToGroup(apiKey, exchangename_Response);
 
-        await AddToGroup(apiKey, exchangename);
-
-        string? gk = GetGroupKey(apiKey, exchangename);
-        await Clients.Group(gk).SendAsync("rcv_request", new MessageItem(apiKey, exchangename, referenceCode, payload));
+        string exchangename_Request = String.Concat(exchangename, "__request");
+        string? gk = GetGroupKey(apiKey, exchangename_Request);
+        await Clients.Group(gk).SendAsync("rcv_request", new MessageItem(apiKey, exchangename_Request, referenceCode, payload));
     }
     public async Task PublishResponse(string apiKey, string exchangename, string referenceCode, object payload)
     {
-        exchangename += "_request";
+        exchangename += "__response";
 
         string? gk = GetGroupKey(apiKey, exchangename);
         await Clients.Group(gk).SendAsync("rcv_response", new MessageItem(apiKey, exchangename, referenceCode, payload));
