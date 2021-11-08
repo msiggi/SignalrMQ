@@ -42,6 +42,7 @@ steps:
   displayName: Pack
   inputs:
     command: pack 
+    includeReferencedProjects: true
     projects: '$(project)'
     arguments: '--configuration $(BuildConfiguration)'
 
