@@ -14,7 +14,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  MSBuildSDKsPath: 'C:\\hostedtoolcache\\windows\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\sdks'
+  #MSBuildSDKsPath: 'C:\\hostedtoolcache\\windows\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\sdks'
 
 
 steps:
@@ -22,8 +22,8 @@ steps:
   displayName: 'Use .NET Core sdk RC2'
   inputs:
     packageType: 'sdk'
-    version: '6.0.100-rc.2.21505.57'
-    includePreviewVersions: true
+   # version: '6.0.100-rc.2.21505.57'
+   # includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
