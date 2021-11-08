@@ -4,11 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  <Company>Marcel Siegel</Company>
+	  <Company>SiegelNet</Company>
 	  <Description>Client-Library for SignalrMQ-Boker</Description>
 	  <PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
-	  <Version>1.0.4</Version>
+	  <Version>1.0.5</Version>
+	  <Authors>Marcel Siegel</Authors>
   </PropertyGroup>
 
   <ItemGroup>
