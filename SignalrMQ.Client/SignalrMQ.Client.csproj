@@ -8,7 +8,7 @@
 		<Description>Client-Library for SignalrMQ-Boker</Description>
 		<PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
-		<Version>1.0.13</Version>
+		<Version>1.0.15</Version>
 		<Authors>Marcel Siegel</Authors>
 		<PackageIcon>Logo_SignalrMQ.png</PackageIcon>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -16,7 +16,7 @@
 
 	<ItemGroup>
 		<None Include="..\Resources\Logo_SignalrMQ.png">
-			<Pack>True</Pack>
+			<Pack>False</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
@@ -28,10 +28,10 @@
 	<ItemGroup>
 		<ProjectReference Include="..\SignalrMQ.Core\SignalrMQ.Core.csproj" />
 	</ItemGroup>
-
-	<Target Name="PostBuild" AfterTargets="Pack">
-		<Exec Command="call $(PkgNuGet_CommandLine)/tools/NuGet.exe add $(SolutionDir)bin\$(MSBuildProjectName)\$(Configuration)\$(ProjectName).$(Version).nupkg -Source $(SolutionDir)..\..\NugetBin" />
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="dotnet pack $(ProjectPath) --no-build --include-source --include-symbols --output $(SolutionDir)..\..\NugetBin" />
 	</Target>
+
 
 
 
