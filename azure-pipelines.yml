@@ -30,15 +30,16 @@ steps:
   inputs:
     command: restore
     projects: |
-     **/*.csproj
-     !**/*WorkerService*.csproj
+      **/*.csproj
+      !**/*WorkerService*.csproj
+
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: build 
     projects: |
-     **/*.csproj
-     !**/*WorkerService*.csproj
+      **/*.csproj
+      !**/*WorkerService*.csproj
     arguments: '--configuration $(BuildConfiguration)'
 
 
