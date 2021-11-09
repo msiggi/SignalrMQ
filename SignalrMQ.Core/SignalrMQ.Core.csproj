@@ -8,7 +8,7 @@
 	  <Description>Core-Library for SignalrMQ-Boker</Description>
 	  <PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
-	  <Version>1.0.11</Version>
+	  <Version>1.0.12</Version>
   </PropertyGroup>
 
 </Project>
