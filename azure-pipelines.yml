@@ -10,8 +10,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  project1:  '**/SignalrMQ.Client.csproj'
-  project2:  '**/SignalrMQ.Broker.csproj'
+#  project:  '**/SignalrMQ.Client.csproj'
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
@@ -27,30 +26,21 @@ steps:
     includePreviewVersions: false
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet restore1'
+  displayName: 'dotnet restore'
   inputs:
     command: restore
-    projects: '$(project1)'
-
+    projects: |
+     **/*.csproj
+     !**/*WorkerService*.csproj
 - task: DotNetCoreCLI@2
-  displayName: Build 1
+  displayName: Build
   inputs:
     command: build 
-    projects: '$(project1)'
+    projects: |
+     **/*.csproj
+     !**/*WorkerService*.csproj
     arguments: '--configuration $(BuildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet restore2'
-  inputs:
-    command: restore
-    projects: '$(project2)'
-
-- task: DotNetCoreCLI@2
-  displayName: Build 2
-  inputs:
-    command: build 
-    projects: '$(project2)'
-    arguments: '--configuration $(BuildConfiguration)'
 
 
 
