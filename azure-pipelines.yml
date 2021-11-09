@@ -41,11 +41,11 @@ steps:
 - task: NuGetCommand@2
   displayName: Pack
   inputs:
-    command: pack 
+    command: 'pack'
     packagesToPack: '**/SignalrMQ.Broker.csproj;**/SignalrMQ.Client.csproj'
+    versioningScheme: 'off'
     includeReferencedProjects: true
-    #projects: '$(project)'
-    arguments: '--configuration $(BuildConfiguration)'
+    includeSymbols: true
 
 - task: NuGetCommand@2
   displayName: "nuget push"
