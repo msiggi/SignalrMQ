@@ -19,6 +19,10 @@ public class SignalrMqClientService : ISignalrMqClientService
         this.logger = logger;
         Task.Run(async () =>
         {
+            if (options.Value.Host == null || options.Value.Port == null)
+            {
+                logger.LogError("Host and/or Port are null. No connections possible!");
+            }
             await StartConnection(options.Value.Host, options.Value.Port);//.GetAwaiter().GetResult();
         });
     }
@@ -40,7 +44,7 @@ public class SignalrMqClientService : ISignalrMqClientService
 
         hubConnection.On<MessageItem>("rcv_request", rcv =>
         {
-            rcv.ExchangeName = rcv.ExchangeName.Replace("__request","");
+            rcv.ExchangeName = rcv.ExchangeName.Replace("__request", "");
             MessageRequestReceived?.Invoke(this, new MessageReceivedEventArgs
             {
                 MessageItem = rcv
