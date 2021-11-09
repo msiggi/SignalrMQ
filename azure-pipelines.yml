@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- nugetrelease
+- nugetreleaseXX
 
 pool:
   vmImage: windows-latest
@@ -23,7 +23,7 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '6.0.100'
-    includePreviewVersions: true
+    includePreviewVersions: false
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'

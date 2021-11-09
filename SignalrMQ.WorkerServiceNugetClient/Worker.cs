@@ -12,6 +12,12 @@ namespace SignalrMQ.WorkerServiceNugetClient
             _logger = logger;
             this.signalrMqClientService = signalrMqClientService;
             this.signalrMqClientService.ConnectionEstablished += SignalrMqClientService_ConnectionEstablished;
+            this.signalrMqClientService.MessageReceived += SignalrMqClientService_MessageReceived;
+        }
+
+        private void SignalrMqClientService_MessageReceived(object? sender, MessageReceivedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void SignalrMqClientService_ConnectionEstablished(object? sender, EventArgs e)

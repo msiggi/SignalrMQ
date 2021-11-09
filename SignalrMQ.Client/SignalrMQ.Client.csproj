@@ -8,7 +8,7 @@
 	  <Description>Client-Library for SignalrMQ-Boker</Description>
 	  <PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
-	  <Version>1.0.10</Version>
+	  <Version>1.0.11</Version>
 	  <Authors>Marcel Siegel</Authors>
 	  <PackageIcon>Logo_SignalrMQ.png</PackageIcon>
 	  <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
