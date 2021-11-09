@@ -1,32 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-	  <Company>SiegelNet</Company>
-	  <Description>Client-Library for SignalrMQ-Boker</Description>
-	  <PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
-	  <RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
-	  <Version>1.0.12</Version>
-	  <Authors>Marcel Siegel</Authors>
-	  <PackageIcon>Logo_SignalrMQ.png</PackageIcon>
-	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Company>SiegelNet</Company>
+		<Description>Client-Library for SignalrMQ-Boker</Description>
+		<PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
+		<Version>1.0.13</Version>
+		<Authors>Marcel Siegel</Authors>
+		<PackageIcon>Logo_SignalrMQ.png</PackageIcon>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\Resources\Logo_SignalrMQ.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\Resources\Logo_SignalrMQ.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SignalrMQ.Core\SignalrMQ.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SignalrMQ.Core\SignalrMQ.Core.csproj" />
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="Pack">
+		<Exec Command="call $(PkgNuGet_CommandLine)/tools/NuGet.exe add $(SolutionDir)bin\$(MSBuildProjectName)\$(Configuration)\$(ProjectName).$(Version).nupkg -Source $(SolutionDir)..\..\NugetBin" />
+	</Target>
+
+
 
 </Project>

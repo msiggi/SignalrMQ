@@ -42,9 +42,9 @@ steps:
   displayName: Pack
   inputs:
     command: 'pack'
-    packagesToPack: '**/SignalrMQ.Broker.csproj;**/SignalrMQ.Client.csproj;**/SignalrMQ.Core.csproj'
+    packagesToPack: '**/SignalrMQ.Broker.csproj;**/SignalrMQ.Client.csproj'
     versioningScheme: 'off'
-    includeReferencedProjects: false
+    includeReferencedProjects: true
     includeSymbols: true
 
 - task: NuGetCommand@2

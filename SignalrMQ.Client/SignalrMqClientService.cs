@@ -16,16 +16,24 @@ public class SignalrMqClientService : ISignalrMqClientService
 
     public SignalrMqClientService(ILogger<SignalrMqClientService> logger, IOptions<SignalrMqEndpoint> options)
     {
-        logger.LogInformation("SignalrMqClientService initalized!");
-        this.logger = logger;
-        Task.Run(async () =>
+        try
         {
-            if (options.Value.Host == null || options.Value.Port == null)
+            logger.LogInformation("initializing SignalrMqClientService...");
+            this.logger = logger;
+            Task.Run(async () =>
             {
-                logger.LogError("Host and/or Port are null. No connections possible!");
-            }
-            await StartConnection(options.Value.Host, options.Value.Port);//.GetAwaiter().GetResult();
-        });
+                if (options.Value.Host == null || options.Value.Port == null)
+                {
+                    logger.LogError("Host and/or Port are null. No connections possible!");
+                }
+                await StartConnection(options.Value.Host, options.Value.Port);//.GetAwaiter().GetResult();
+            });
+        }
+        catch (Exception ex)
+        {
+            logger.LogError("Error initializing SignalrMqClientService!");
+            logger.LogError(ex, ex.Message);
+        }
     }
 
     public async Task StartConnection(string host, int port = 443)
