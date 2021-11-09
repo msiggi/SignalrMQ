@@ -16,6 +16,7 @@ public class SignalrMqClientService : ISignalrMqClientService
 
     public SignalrMqClientService(ILogger<SignalrMqClientService> logger, IOptions<SignalrMqEndpoint> options)
     {
+        logger.LogInformation("SignalrMqClientService initalized!");
         this.logger = logger;
         Task.Run(async () =>
         {

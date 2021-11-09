@@ -17,21 +17,25 @@ namespace SignalrMQ.WorkerServiceNugetClient
 
         private void SignalrMqClientService_MessageReceived(object? sender, MessageReceivedEventArgs e)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation(e.MessageItem.ReferenceCode + " - " + e.MessageItem.Payload.ToString());
         }
 
         private void SignalrMqClientService_ConnectionEstablished(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Task.Run(async () =>
+            {
+                await signalrMqClientService.Subscribe("ThingsBridge", "ThingValue");
+               // await signalrMqClientService.SubscribeForRequest("testapikey", "getDateTime");
+            });
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
-            }
+            //while (!stoppingToken.IsCancellationRequested)
+            //{
+            //    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+            //    await Task.Delay(1000, stoppingToken);
+            //}
         }
     }
 }

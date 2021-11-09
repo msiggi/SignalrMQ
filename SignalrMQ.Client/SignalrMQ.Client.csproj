@@ -11,7 +11,7 @@
 	  <Version>1.0.11</Version>
 	  <Authors>Marcel Siegel</Authors>
 	  <PackageIcon>Logo_SignalrMQ.png</PackageIcon>
-	  <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
