@@ -33,10 +33,10 @@ steps:
     projects: '$(project1)'
 
 - task: DotNetCoreCLI@2
-  displayName: Build
+  displayName: Build 1
   inputs:
     command: build 
-    projects: '$(project2)'
+    projects: '$(project1)'
     arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
@@ -46,10 +46,10 @@ steps:
     projects: '$(project2)'
 
 - task: DotNetCoreCLI@2
-  displayName: Build
+  displayName: Build 2
   inputs:
     command: build 
-    projects: '$(project1)'
+    projects: '$(project2)'
     arguments: '--configuration $(BuildConfiguration)'
 
 
