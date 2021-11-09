@@ -10,10 +10,14 @@ pool:
   vmImage: windows-latest
 
 steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: '**/SignalrMQ.Broker.csproj;**/SignalrMQ.Client.csproj'
     versioningScheme: 'off'
     includeReferencedProjects: true
     includeSymbols: true
