@@ -16,7 +16,7 @@
 
 	<ItemGroup>
 		<None Include="..\Resources\Logo_SignalrMQ.png">
-			<Pack>False</Pack>
+			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
