@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{87CDBAC6-C874-40A0-A981-D5313488E58A}"
 	ProjectSection(SolutionItems) = preProject
 		azure-pipelines.yml = azure-pipelines.yml
+		nugetsTest.yml = nugetsTest.yml
 		README.md = README.md
 		SignalrMQ-Broker.yml = SignalrMQ-Broker.yml
 	EndProjectSection
@@ -26,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testprojects", "Testproject
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{69DD9863-32BA-46E5-B5E4-6B7F0D988AD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalrMQ.WorkerServiceNugetClient", "SignalrMQ.WorkerServiceNugetClient\SignalrMQ.WorkerServiceNugetClient.csproj", "{057CF0CC-04C6-4AA5-9049-8BEB36173A3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrMQ.WorkerServiceNugetClient", "SignalrMQ.WorkerServiceNugetClient\SignalrMQ.WorkerServiceNugetClient.csproj", "{057CF0CC-04C6-4AA5-9049-8BEB36173A3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
