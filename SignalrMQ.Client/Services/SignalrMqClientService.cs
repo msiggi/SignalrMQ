@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SignalrMQ.Client.Configuration;
 using SignalrMQ.Core;
 
-namespace SignalrMQ.Client;
+namespace SignalrMQ.Client.Services;
 
-public class SignalrMqClientService : ISignalrMqClientService
+public class SignalrMqClientService
 {
     private readonly ILogger<SignalrMqClientService> logger;
     private HubConnection hubConnection;
@@ -22,7 +23,7 @@ public class SignalrMqClientService : ISignalrMqClientService
             this.logger = logger;
             Task.Run(async () =>
             {
-                if (options.Value.Host == null || options.Value.Port == null)
+                if (options.Value.Host == null || options.Value.Port == 0)
                 {
                     logger.LogError("Host and/or Port are null. No connections possible!");
                 }

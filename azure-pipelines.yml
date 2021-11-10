@@ -49,7 +49,7 @@ steps:
     packagesToPack: '**/SignalrMQ.Broker.csproj;**/SignalrMQ.Client.csproj'
     versioningScheme: 'off'
     includeReferencedProjects: true
-    includeSymbols: true
+    includeSymbols: false
     nobuild: true
 
 - task: NuGetCommand@2

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>SignalrMQ.Client</id>
+    <version>1.0.16</version>
+    <authors>Marcel Siegel</authors>
+    <projectUrl>https://github.com/msiggi/SignalrMQ</projectUrl>
+    <description>Client-Library for SignalrMQ-Boker</description>
+    <repository url="https://github.com/msiggi/SignalrMQ" />
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

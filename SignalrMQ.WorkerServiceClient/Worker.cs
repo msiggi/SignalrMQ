@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using SignalrMQ.Client;
+using SignalrMQ.Client.Services;
 using SignalrMQ.WorkerServiceClient.Configuration;
 
 namespace SignalrMQ.WorkerServiceClient

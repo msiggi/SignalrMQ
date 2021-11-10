@@ -1,4 +1,5 @@
 ﻿using SignalrMQ.Client;
+using SignalrMQ.Client.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
 ﻿using SignalrMQ.Core;
 
-namespace SignalrMQ.Client
+namespace SignalrMQ.Client.Services
 {
     public class MessageReceivedEventArgs : EventArgs
     {

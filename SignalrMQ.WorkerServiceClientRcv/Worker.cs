@@ -1,4 +1,5 @@
 using SignalrMQ.Client;
+using SignalrMQ.Client.Services;
 using SignalrMQ.Core;
 using SignalrMQ.WorkerServiceClientRcv.Configuration;
 

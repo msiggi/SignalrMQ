@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SignalrMQ.Client;
+using SignalrMQ.Client.Configuration;
+using SignalrMQ.Client.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
