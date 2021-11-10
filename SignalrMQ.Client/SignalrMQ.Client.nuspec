@@ -3,9 +3,9 @@
   <metadata>
     <id>SignalrMQ.Client</id>
     <version>1.0.16</version>
-    <authors>Marcel Siegel</authors>
+    <authors>$Authors$</authors>
     <projectUrl>https://github.com/msiggi/SignalrMQ</projectUrl>
-    <description>Client-Library for SignalrMQ-Boker</description>
+    <description>$Description$</description>
     <repository url="https://github.com/msiggi/SignalrMQ" />
     <dependencies>
       <group targetFramework="net6.0">
