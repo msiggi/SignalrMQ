@@ -51,8 +51,7 @@ steps:
     includeReferencedProjects: true
     includeSymbols: false
     nobuild: true
-    buildProperties: 'Description="test"'
-        
+            
 
 - task: NuGetCommand@2
   displayName: "nuget push"
