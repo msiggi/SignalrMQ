@@ -1,4 +1,5 @@
 using SignalrMQ.Client;
+using SignalrMQ.Client.Services;
 
 namespace SignalrMQ.WorkerServiceNugetClient
 {
@@ -25,17 +26,18 @@ namespace SignalrMQ.WorkerServiceNugetClient
             Task.Run(async () =>
             {
                 await signalrMqClientService.Subscribe("ThingsBridge", "ThingValue");
-               // await signalrMqClientService.SubscribeForRequest("testapikey", "getDateTime");
+                // await signalrMqClientService.SubscribeForRequest("testapikey", "getDateTime");
             });
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-            //    await Task.Delay(1000, stoppingToken);
-            //}
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                await signalrMqClientService.PublishRequest("ThingsBridge", "ThingValue", "", DateTime.Now);
+                //    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                await Task.Delay(1000, stoppingToken);
+            }
         }
     }
 }

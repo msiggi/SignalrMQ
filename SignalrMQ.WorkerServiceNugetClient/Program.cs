@@ -1,4 +1,5 @@
 using SignalrMQ.Client;
+using SignalrMQ.Client.Configuration;
 using SignalrMQ.WorkerServiceNugetClient;
 
 IHost host = Host.CreateDefaultBuilder(args)
