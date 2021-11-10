@@ -42,9 +42,6 @@ steps:
       !**/*WorkerService*.csproj
     arguments: '--configuration $(BuildConfiguration)'
 
-
-
-
 - task: NuGetCommand@2
   displayName: Pack
   inputs:
@@ -53,6 +50,7 @@ steps:
     versioningScheme: 'off'
     includeReferencedProjects: true
     includeSymbols: true
+    nobuild: true
 
 - task: NuGetCommand@2
   displayName: "nuget push"
@@ -61,3 +59,4 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: '3369fa02-658e-4673-b8a1-a747ff16848a'
+    

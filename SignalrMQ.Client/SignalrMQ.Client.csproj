@@ -28,9 +28,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\SignalrMQ.Core\SignalrMQ.Core.csproj" />
 	</ItemGroup>
-	<!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="dotnet pack $(ProjectPath) --no-build --include-source --include-symbols --output $(SolutionDir)..\..\NugetBin" />
-	</Target>-->
+	
 
 
 
