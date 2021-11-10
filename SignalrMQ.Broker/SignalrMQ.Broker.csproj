@@ -10,7 +10,6 @@
     <RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
     <Version>1.0.15</Version>
     <Authors>Marcel Siegel</Authors>
-    <PackageIcon>Logo_SignalrMQ.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
