@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SignalrMQ.Client.Configuration;
 using SignalrMQ.Core;
+using System.Text.Json;
 
 namespace SignalrMQ.Client.Services;
 
@@ -107,7 +108,8 @@ public class SignalrMqClientService
     {
         if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
         {
-            await hubConnection.SendAsync("Publish", apiKey, exchangename, referenceCode, payload);
+            string payloadString = JsonSerializer.Serialize(payload);
+            await hubConnection.SendAsync("Publish", apiKey, exchangename, referenceCode, payloadString);
         }
     }
 
@@ -115,7 +117,8 @@ public class SignalrMqClientService
     {
         if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
         {
-            await hubConnection.SendAsync("PublishRequest", apiKey, exchangename, referenceCode, payload);
+            string payloadString = JsonSerializer.Serialize(payload);
+            await hubConnection.SendAsync("PublishRequest", apiKey, exchangename, referenceCode, payloadString);
         }
     }
 
@@ -123,7 +126,8 @@ public class SignalrMqClientService
     {
         if (hubConnection != null && hubConnection.State == HubConnectionState.Connected)
         {
-            await hubConnection.SendAsync("PublishResponse", apiKey, exchangename, referenceCode, payload);
+            string payloadString = JsonSerializer.Serialize(payload);
+            await hubConnection.SendAsync("PublishResponse", apiKey, exchangename, referenceCode, payloadString);
         }
     }
 
