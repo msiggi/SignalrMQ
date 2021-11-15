@@ -46,7 +46,7 @@ public class Worker : BackgroundService
         {
             _logger.LogInformation("Sende..." + i);
             await signalrMqClientService.Publish("testapikey", "test", "testref", new TestObject(i, DateTime.Now, "TestPublish/with/path"));
-            //await signalrMqClientService.PublishRequest("testapikey", "getDateTime", "testref", "Payload: " + DateTime.Now + " " + i);
+            await signalrMqClientService.PublishRequest("testapikey", "getDateTime", "testref", "Payload: " + DateTime.Now + " " + i);
             i++;
             await Task.Delay(1000, stoppingToken);
         }
