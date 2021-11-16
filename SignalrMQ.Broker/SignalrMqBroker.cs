@@ -40,6 +40,8 @@ public class SignalrMqBroker : Hub
     private async Task AddToGroup(string apiKey, string exchangename)
     {
         string? gk = GetGroupKey(apiKey, exchangename);
+
+        //await Groups.RemoveFromGroupAsync(Context.ConnectionId, gk);
         await Groups.AddToGroupAsync(Context.ConnectionId, gk);
     }
 

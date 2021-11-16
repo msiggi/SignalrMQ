@@ -22,6 +22,7 @@ public class Worker : BackgroundService
 
     private async void SignalrMqClientService_MessageRequestReceived(object? sender, MessageReceivedEventArgs e)
     {
+        _logger.LogInformation($"Request Received {e.MessageItem.ExchangeName}");
         await signalrMqClientService.PublishResponse(e.MessageItem.ApiKey, e.MessageItem.ExchangeName, e.MessageItem.ReferenceCode, DateTime.Now);
     }
 

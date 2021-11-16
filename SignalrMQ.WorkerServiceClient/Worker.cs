@@ -10,6 +10,7 @@ public class Worker : BackgroundService
     private readonly ILogger<Worker> _logger;
     private readonly SignalrMqClientService signalrMqClientService;
     private object connection;
+    private int cnt = 0;
 
     public Worker(ILogger<Worker> logger, SignalrMqClientService signalrMqClientService)
     {
@@ -22,7 +23,8 @@ public class Worker : BackgroundService
 
     private void SignalrMqClientService_MessageResponseReceived(object? sender, MessageReceivedEventArgs e)
     {
-        throw new NotImplementedException();
+        cnt++;
+        _logger.LogInformation($"Response Received {e.MessageItem.ExchangeName} #{cnt}");
     }
 
     private void SignalrMqClientService_MessageReceived(object? sender, MessageReceivedEventArgs e)
