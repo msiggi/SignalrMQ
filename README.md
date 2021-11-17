@@ -23,6 +23,35 @@ This project consist of:
 
 The implementation based on .Net 6 Core
 
+## Usage
+
+### Broker
+
+Implement in exisiting or new (Asp.Net)-Application-Startup:
+
+```csharp
+app.UseEndpoints(endpoints => endpoints.MapHub<SignalrMqBroker>("signalrmqbrokerhub"));
+```
+
+Sample-Project: SignalrMQ.BlazorBroker
+
+### Clients
+
+```csharp
+services.AddSignalrMqClientService(opts => hostContext.Configuration.GetSection(nameof(SignalrMqEndpoint)).Bind(opts));
+```
+
+Configure in aasettings.json:
+```json
+"SignalrMqEndpoint": {
+    "Host": "localhost",
+    "Port": 7284
+  }
+```
+
+Subscribe, Publish, Request ... more description coming soon. Please take a look at [Worker.cs](https://github.com/msiggi/SignalrMQ/blob/master/SignalrMQ.WorkerServiceClientRcv/Worker.cs)
+
+
 ## Missing features
 
 Currently is no authentification implemented. Please be aware of this if you publish SignalrMQ-based Applications in public internet.
