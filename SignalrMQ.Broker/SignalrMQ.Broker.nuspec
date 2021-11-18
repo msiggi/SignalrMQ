@@ -6,7 +6,7 @@
     <authors>$Authors$</authors>
     <projectUrl>$PackageProjectUrl$</projectUrl>
     <description>$Description$</description>
-	  <PackageIcon>Logo_SignalrMQ_small.png</PackageIcon>
+	  <icon>Logo_SignalrMQ_small.png</icon>
 
 	  <repository url="$RepositoryUrl$" />
     <dependencies>
