@@ -10,7 +10,6 @@
 		<RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
 		<Version>1.0.25</Version>
 		<Authors>Marcel Siegel</Authors>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageIcon>Logo_SignalrMQ_small.png</PackageIcon>
 	</PropertyGroup>
 
@@ -18,11 +17,6 @@
 		<None Include="..\Resources\Logo_SignalrMQ.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="..\Resources\Logo_SignalrMQ_small.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 
@@ -32,6 +26,12 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\SignalrMQ.Core\SignalrMQ.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Logo_SignalrMQ_small.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>
