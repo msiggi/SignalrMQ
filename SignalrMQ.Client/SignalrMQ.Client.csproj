@@ -8,14 +8,19 @@
 		<Description>Client-Library for SignalrMQ-Boker</Description>
 		<PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
-		<Version>1.0.24</Version>
+		<Version>1.0.25</Version>
 		<Authors>Marcel Siegel</Authors>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageIcon>Logo_SignalrMQ_small.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="..\Resources\Logo_SignalrMQ.png">
-			<Pack>False</Pack>
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\Resources\Logo_SignalrMQ_small.png">
+			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
