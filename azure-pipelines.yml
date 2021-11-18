@@ -60,4 +60,14 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: '$(AzurApiKey)'
-    
+
+- task: DotNetCoreCLI@2
+  displayName: Push Nuget Package
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: >
+      push $(Agent.BuildDirectory)/$(ArtifactNugetName)/*.nupkg
+      -s https://api.nuget.org/v3/index.json
+      -k $(NuGetApiKey) 
+ 
