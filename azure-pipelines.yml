@@ -69,5 +69,5 @@ steps:
     arguments: >
       push $(Agent.BuildDirectory)/$(ArtifactNugetName)/*.nupkg
       -s https://api.nuget.org/v3/index.json
-      -k $(NuGetApiKey) 
+      -k $(NugetOrgApiKey) 
  
