@@ -6,7 +6,6 @@
 		<authors>$Authors$</authors>
 		<projectUrl>$PackageProjectUrl$</projectUrl>
 		<description>$Description$</description>
-		<icon>Logo_SignalrMQ_small.png</icon>
 		<repository url="$RepositoryUrl$" />
 		<dependencies>
 			<group targetFramework="net6.0">
