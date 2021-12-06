@@ -53,21 +53,27 @@ steps:
     nobuild: true
             
 
-#- task: NuGetCommand@2
-#  displayName: "nuget push"
-#  inputs:
-#    command: 'push'
-#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-#    nuGetFeedType: 'internal'
-#    publishVstsFeed: '$(AzurApiKey)'
-
-- task: DotNetCoreCLI@2
-  displayName: Push Nuget Package
+- task: NuGetCommand@2
+  displayName: "nuget push"
   inputs:
-    command: custom
-    custom: nuget
-    arguments: >
-      push $(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg
-      -s https://api.nuget.org/v3/index.json
-      -k $(NugetOrgApiKey) 
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '$(AzurApiKey)'
+
+#- task: DotNetCoreCLI@2
+#  displayName: Push Nuget Package
+#  inputs:
+#    command: custom
+#    custom: nuget
+#    arguments: >
+#      push $(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg
+#      -s https://api.nuget.org/v3/index.json
+#      -k $(NugetOrgApiKey) 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'Nuget.org'
  
