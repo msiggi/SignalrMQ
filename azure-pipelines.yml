@@ -53,13 +53,13 @@ steps:
     nobuild: true
             
 
-- task: NuGetCommand@2
-  displayName: "nuget push"
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: '$(AzurApiKey)'
+#- task: NuGetCommand@2
+#  displayName: "nuget push"
+#  inputs:
+#    command: 'push'
+#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+#    nuGetFeedType: 'internal'
+#    publishVstsFeed: '$(AzurApiKey)'
 
 - task: DotNetCoreCLI@2
   displayName: Push Nuget Package
