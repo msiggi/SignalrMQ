@@ -54,7 +54,7 @@ steps:
             
 
 - task: NuGetCommand@2
-  displayName: "nuget push"
+  displayName: "nuget push Artifactory"
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
@@ -70,10 +70,11 @@ steps:
 #      push $(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg
 #      -s https://api.nuget.org/v3/index.json
 #      -k $(NugetOrgApiKey) 
-- task: DotNetCoreCLI@2
+- task: NuGetCommand@2
+  displayName: "nuget push nuget.org"
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'Nuget.org'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '$(AzurApiKey)'
  
