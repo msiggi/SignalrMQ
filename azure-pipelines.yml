@@ -52,12 +52,20 @@ steps:
     includeSymbols: false
     nobuild: true
             
+- task: NuGetCommand@2
+  displayName: "nuget push nuget.org"
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'Nuget.org'
 
 - task: NuGetCommand@2
-  displayName: "nuget push"
+  displayName: "nuget push Artifactory"
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: '$(AzurApiKey)'
-    
+
+ 
