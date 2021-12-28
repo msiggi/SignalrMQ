@@ -8,7 +8,7 @@
     <Description>Broker for SignalrMQ</Description>
     <PackageProjectUrl>https://github.com/msiggi/SignalrMQ</PackageProjectUrl>
     <RepositoryUrl>https://github.com/msiggi/SignalrMQ</RepositoryUrl>
-    <Version>1.0.29</Version>
+    <Version>1.0.30</Version>
     <Authors>Marcel Siegel</Authors>
     <PackageIcon>Logo_SignalrMQ_small.png</PackageIcon>
   </PropertyGroup>

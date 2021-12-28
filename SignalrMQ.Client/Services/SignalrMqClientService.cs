@@ -10,6 +10,7 @@ namespace SignalrMQ.Client.Services;
 public class SignalrMqClientService
 {
     private readonly ILogger<SignalrMqClientService> logger;
+    private readonly IOptions<SignalrMqEndpoint> options;
     private HubConnection hubConnection;
     public event EventHandler<MessageReceivedEventArgs> MessageReceived;
     public event EventHandler<MessageReceivedEventArgs> MessageRequestReceived;
@@ -28,13 +29,27 @@ public class SignalrMqClientService
                 {
                     logger.LogError("Host and/or Port are null. No connections possible!");
                 }
-                await StartConnection(options.Value.Host, options.Value.Port);//.GetAwaiter().GetResult();
+
+                if (options.Value.Autoconnect)
+                {
+                    await StartConnection(options.Value.Host, options.Value.Port);
+                }
             });
         }
         catch (Exception ex)
         {
             logger.LogError("Error initializing SignalrMqClientService!");
             logger.LogError(ex, ex.Message);
+        }
+
+        this.options = options;
+    }
+
+    public async Task StartConnection()
+    {
+        if (options.Value.Host != null && options.Value.Port != 0)
+        {
+            await StartConnection(options.Value.Host, options.Value.Port);
         }
     }
 

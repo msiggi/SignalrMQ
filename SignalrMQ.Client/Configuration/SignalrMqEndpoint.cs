@@ -10,5 +10,6 @@ namespace SignalrMQ.Client.Configuration
     {
         public string Host { get; set; }
         public int Port { get; set; }
+        public bool Autoconnect { get; set; } = true;
     }
 }

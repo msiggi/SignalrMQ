@@ -58,7 +58,8 @@ Configure in aasettings.json:
 ```json
 "SignalrMqEndpoint": {
     "Host": "localhost",
-    "Port": 7284
+    "Port": 7284,
+    "Autoconnect": true
   }
 ```
 
