@@ -96,7 +96,7 @@ public class SignalrMqClientService
         await Connect(url);
     }
 
-    private async Task Disconnect()
+    private async Task StopConnection()
     {
         await hubConnection.StopAsync();
     }
