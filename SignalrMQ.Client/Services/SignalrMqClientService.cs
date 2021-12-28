@@ -93,8 +93,12 @@ public class SignalrMqClientService
                 MessageItem = rcv
             });
         });
-
         await Connect(url);
+    }
+
+    private async Task Disconnect()
+    {
+        await hubConnection.StopAsync();
     }
 
     private async Task Connect(string url)
