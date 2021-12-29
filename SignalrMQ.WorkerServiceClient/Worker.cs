@@ -24,7 +24,7 @@ public class Worker : BackgroundService
     private void SignalrMqClientService_MessageResponseReceived(object? sender, MessageReceivedEventArgs e)
     {
         cnt++;
-        _logger.LogInformation($"Response Received {e.MessageItem.ExchangeName} #{cnt}");
+        _logger.LogInformation($"Response Received {e.MessageItem.ExchangeName} #{cnt}: Payload: {e.MessageItem.Payload}");
     }
 
     private void SignalrMqClientService_MessageReceived(object? sender, MessageReceivedEventArgs e)

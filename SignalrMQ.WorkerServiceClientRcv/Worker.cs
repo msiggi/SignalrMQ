@@ -19,7 +19,7 @@ public class Worker : BackgroundService
         this.signalrMqClientService.MessageReceived += SignalrMqClientService_MessageReceived;
         this.signalrMqClientService.MessageRequestReceived += SignalrMqClientService_MessageRequestReceived;
 
-        // just for demonstration, if Autocennect == false, "StartConnection" can be triggered dedicated
+        // just for demonstration, if Autoconnect == false, "StartConnection" can be triggered dedicated
         this.signalrMqClientService.StartConnection();
     }
 
