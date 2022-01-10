@@ -62,10 +62,21 @@ public class SignalrMqClientService
 
         hubConnection.Closed += async (error) =>
         {
-            logger.LogError($"Connection to {url} closed! Trying to reconnect...");
+            do
+            {
+                logger.LogError($"Connection to {url} closed! Trying to reconnect...");
 
-            await Task.Delay(new Random().Next(0, 5) * 1000);
-            await hubConnection.StartAsync();
+                await Task.Delay(new Random().Next(0, 5) * 1000);
+                try
+                {
+                    //await hubConnection.StartAsync();
+                    await hubConnection.StartAsync();
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError($"Connection to {url} failed again! Trying to reconnect...");
+                }
+            } while (hubConnection.State == HubConnectionState.Disconnected);
         };
 
         hubConnection.On<MessageItem>("rcv_request", rcv =>
