@@ -20,7 +20,10 @@ public class Worker : BackgroundService
         this.signalrMqClientService.MessageRequestReceived += SignalrMqClientService_MessageRequestReceived;
 
         // just for demonstration, if Autoconnect == false, "StartConnection" can be triggered dedicated
-        this.signalrMqClientService.StartConnection();
+        Task.Run(async () =>
+        {
+            await this.signalrMqClientService.StartConnection();
+        });
     }
 
     private async void SignalrMqClientService_MessageRequestReceived(object? sender, MessageReceivedEventArgs e)

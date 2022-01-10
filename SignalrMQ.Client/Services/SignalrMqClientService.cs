@@ -60,23 +60,27 @@ public class SignalrMqClientService
                         .WithUrl(url)
                         .Build();
 
+        //hubConnection.HandshakeTimeout = new TimeSpan(0, 0, 5);
+        //hubConnection.ServerTimeout = new TimeSpan(0, 0, 5);
+        //hubConnection.KeepAliveInterval = new TimeSpan(0, 0, 5);
+
         hubConnection.Closed += async (error) =>
         {
-            do
-            {
+            //do
+            //{
                 logger.LogError($"Connection to {url} closed! Trying to reconnect...");
 
                 await Task.Delay(new Random().Next(0, 5) * 1000);
                 try
                 {
                     //await hubConnection.StartAsync();
-                    await hubConnection.StartAsync();
+                    await StartConnection();
                 }
                 catch (Exception ex)
                 {
                     logger.LogError($"Connection to {url} failed again! Trying to reconnect...");
                 }
-            } while (hubConnection.State == HubConnectionState.Disconnected);
+            //} while (hubConnection.State == HubConnectionState.Disconnected);
         };
 
         hubConnection.On<MessageItem>("rcv_request", rcv =>
@@ -118,10 +122,20 @@ public class SignalrMqClientService
         {
             logger.LogInformation($"connecting to {url} ...");
 
-            await hubConnection.StartAsync().ContinueWith((t) =>
+            await hubConnection.StartAsync().ContinueWith(async (t) =>
             {
-                ConnectionEstablished?.Invoke(this, new EventArgs());
-                logger.LogInformation($"Connection to {url} established!");
+                if (hubConnection.State == HubConnectionState.Connected)
+                {
+                    ConnectionEstablished?.Invoke(this, new EventArgs());
+                    logger.LogInformation($"Connection to {url} established!");
+                }
+                else
+                {
+                    logger.LogError($"No connection to {url} established! Trying again...");
+
+                    await Task.Delay(new Random().Next(0, 5) * 1000);
+                    await Connect(url);
+                }
             });
 
         }
