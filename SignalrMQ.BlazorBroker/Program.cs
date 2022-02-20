@@ -28,6 +28,7 @@ app.UseRouting();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-app.UseEndpoints(endpoints => endpoints.MapHub<SignalrMqBroker>("signalrmqbrokerhub"));
+app.UseEndpoints(endpoints => endpoints.MapHub<SignalrMqBroker>("signalrmqbrokerhub",
+    configureOptions => { configureOptions.TransportMaxBufferSize = 10 * 1024 * 1024; }));
 
 app.Run();

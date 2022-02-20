@@ -60,6 +60,7 @@ public class SignalrMqClientService
                         .WithUrl(url)
                         .Build();
 
+        hubConnection.
         //hubConnection.HandshakeTimeout = new TimeSpan(0, 0, 5);
         //hubConnection.ServerTimeout = new TimeSpan(0, 0, 5);
         //hubConnection.KeepAliveInterval = new TimeSpan(0, 0, 5);
