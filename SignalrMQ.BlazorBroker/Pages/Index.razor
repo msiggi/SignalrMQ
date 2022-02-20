@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Reflection
 
 <PageTitle>SignalrMQ-Broker</PageTitle>
 
@@ -6,3 +7,32 @@
 
 
 <img src="images/Logo_SignalrMQ_small.png" width="100" height="100" />
+
+<div  class="fixed-bottom text-end p-5">
+    @if (assembly != null)
+    {
+        <dl>
+            <dt>Name</dt>
+            <dd>@assembly.FullName</dd>
+            <dt>ImageRuntimeVersion</dt>
+            <dd>@assembly.ImageRuntimeVersion</dd>
+            <dt>File-Version</dt>
+            <dd>@fileInfo.LastWriteTime.ToLocalTime()</dd>
+        </dl>
+    }
+</div>
+
+
+@code
+{
+    Assembly? assembly;
+    FileInfo fileInfo;
+
+    protected override Task OnInitializedAsync()
+    {
+        assembly = Assembly.GetEntryAssembly();
+        fileInfo = new FileInfo(assembly.Location);
+
+        return base.OnInitializedAsync();
+    }
+}
