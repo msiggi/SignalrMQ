@@ -57,12 +57,22 @@ public class SignalrMqClientService
     {
         string url = $"https://{host}:{port}/signalrmqbrokerhub";
         hubConnection = new HubConnectionBuilder()
+            
+                         //.ConfigureLogging(logging =>
+                         //{
+                         //    // Log to the Console
+                         //    logging.AddConsole();
+
+                         //    // This will set ALL logging to Debug level
+                         //    logging.SetMinimumLevel(LogLevel.Debug);
+                         //})
                         .WithUrl(url)
                         .Build();
 
         hubConnection.Closed += async (error) =>
         {
             logger.LogError($"Connection to {url} closed! Trying to reconnect...");
+            logger.LogError($"{error.Message}");
 
             await Task.Delay(new Random().Next(0, 5) * 1000);
             try
