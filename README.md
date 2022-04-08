@@ -27,6 +27,8 @@ The implementation based on .Net 6 Core
 
 ### Broker
 
+Implement in exisiting or new (Asp.Net/Blazor/WorkerService)-Application!
+
 #### Nuget
 Use [Nuget-Package](https://www.nuget.org/packages/SignalrMQ.Broker)
 ```
@@ -34,7 +36,7 @@ Install-Package SignalrMQ.Broker
 ```
 
 
-Implement in exisiting or new (Asp.Net)-Application-Startup:
+Add in Startup.cs/Program.cs:
 
 ```csharp
 app.UseEndpoints(endpoints => endpoints.MapHub<SignalrMqBroker>("signalrmqbrokerhub"));
@@ -43,6 +45,7 @@ app.UseEndpoints(endpoints => endpoints.MapHub<SignalrMqBroker>("signalrmqbroker
 Sample-Project: SignalrMQ.BlazorBroker
 
 ### Clients
+
 
 #### Nuget
 Use [Nuget-Package](https://www.nuget.org/packages/SignalrMQ.Client)
