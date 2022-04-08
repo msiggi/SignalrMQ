@@ -10,6 +10,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
-	  <PackageReference Include="SignalrMQ.Client" Version="1.0.35" />
+	  <PackageReference Include="SignalrMQ.Client" Version="1.0.37" />
   </ItemGroup>
 </Project>
