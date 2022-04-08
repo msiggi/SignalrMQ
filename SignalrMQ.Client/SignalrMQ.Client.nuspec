@@ -9,7 +9,7 @@
 		<repository url="$RepositoryUrl$" />
 		<dependencies>
 			<group targetFramework="net6.0">
-				<dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.*" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.0.1" exclude="Build,Analyzers" />
 			</group>
 		</dependencies>
 		<icon>Logo_SignalrMQ_small.png</icon>
