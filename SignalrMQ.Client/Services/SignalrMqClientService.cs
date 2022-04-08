@@ -57,30 +57,32 @@ public class SignalrMqClientService
     {
         string url = $"https://{host}:{port}/signalrmqbrokerhub";
         hubConnection = new HubConnectionBuilder()
+            
+                         //.ConfigureLogging(logging =>
+                         //{
+                         //    // Log to the Console
+                         //    logging.AddConsole();
+
+                         //    // This will set ALL logging to Debug level
+                         //    logging.SetMinimumLevel(LogLevel.Debug);
+                         //})
                         .WithUrl(url)
                         .Build();
 
-        //hubConnection.HandshakeTimeout = new TimeSpan(0, 0, 5);
-        //hubConnection.ServerTimeout = new TimeSpan(0, 0, 5);
-        //hubConnection.KeepAliveInterval = new TimeSpan(0, 0, 5);
-
         hubConnection.Closed += async (error) =>
         {
-            //do
-            //{
-                logger.LogError($"Connection to {url} closed! Trying to reconnect...");
+            logger.LogError($"Connection to {url} closed! Trying to reconnect...");
+            logger.LogError($"{error.Message}");
 
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                try
-                {
-                    //await hubConnection.StartAsync();
-                    await StartConnection();
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError($"Connection to {url} failed again! Trying to reconnect...");
-                }
-            //} while (hubConnection.State == HubConnectionState.Disconnected);
+            await Task.Delay(new Random().Next(0, 5) * 1000);
+            try
+            {
+                await StartConnection();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Connection to {url} failed again! Trying to reconnect...");
+            }
         };
 
         hubConnection.On<MessageItem>("rcv_request", rcv =>
